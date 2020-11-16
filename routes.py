@@ -1,12 +1,17 @@
-from flask import Flask
-from jinja2 import Environment, FileSystemLoader
+from flask import (
+	Flask,
+	render_template)
 
 app = Flask(__name__)
-env = Environment(loader = FileSystemLoader('templates'))
+
+@app.route('/start')
+def start():
+	return render_template('start.html', title='hello')
 
 @app.route('/')
+@app.route('/main')
 def main():
-	return env.get_template('base.html').render(title = 'hello')
+	return render_template('main.html')
 
 if __name__ == '__main__':
 	app.run(debug=True)

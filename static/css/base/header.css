@@ -1,0 +1,28 @@
+ul.main_menu {
+	list-style: none;
+	background: #3F4137;
+	height: 60px;
+	margin: 0;
+	padding: 0;
+	color: #fdc073;
+	font-size: 20px;
+	overflow: hidden;
+}
+
+ul.main_menu li {
+	float: left;
+	margin: 18px 40px 0 50px;
+}
+
+ul.main_menu li.last {
+	float: right ;
+}
+
+ul.main_menu li a {
+	color: #fdc073;
+	text-decoration: none;
+}
+
+ul.main_menu li a:hover {
+	color: #FDA83D;
+}

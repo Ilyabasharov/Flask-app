@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+{% from 'base/defaults.html' import def_title, def_menu %}
+
+<head>
+	<meta charset="utf-8">
+	<base href="{{ domain }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" type="text/css">
+	{% if title %}
+		<title>{{ title }}</title>
+	{% else %}
+		{{ def_title() }}
+	{% endif %}
+</head>
+
+<body>
+
+{% block main_menu %}
+	<ul>
+	{% if menu %}
+		{% for item in menu %}
+			<li>{{ m }}</li>
+		{% endfor %}
+	{% else %}
+		{{ def_menu() }}
+	{% endif %}
+	</ul>
+{% endblock main_menu %}
+	
