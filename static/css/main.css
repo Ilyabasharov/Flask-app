@@ -1,3 +1,4 @@
-@import url('base/header.css')
-@import url('base/content.css')
-@import url('base/footer.css')
+@import 'base/defaults.css';
+@import 'base/header.css';
+@import 'base/content.css';
+@import 'base/footer.css';

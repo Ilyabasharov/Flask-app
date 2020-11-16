@@ -1,7 +1,9 @@
-body {
-    font-family: Arial, Tahoma;
-    font-size: 100%;
-    color: #000;
-    background: #407189;
-    margin: 0;
+.footer {
+    list-style: none;
+    background: #3F4137;
+    height: 5%;
+    color: #fdc073;
+    font-size: 150%;
+    overflow: hidden;
+    box-sizing: border-box;
 }

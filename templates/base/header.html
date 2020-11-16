@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+{% from 'base/defaults.html' import def_title, def_menu, def_domain %}
 
-{% from 'base/defaults.html' import def_title, def_menu %}
-
+<html>
 <head>
 	<meta charset="utf-8">
-	<base href="{{ domain }}">
+	{% if domain %}
+		<base href="{{ domain }}">
+	{% else %}
+		{{ def_domain() }}
+	{% endif %}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" type="text/css">
 	{% if title %}
 		<title>{{ title }}</title>
@@ -15,15 +19,15 @@
 
 <body>
 
-{% block main_menu %}
-	<ul>
+{% block header %}
+	<div class = "main_menu">
 	{% if menu %}
-		{% for item in menu %}
-			<li>{{ m }}</li>
+		{% for item in menu -%}
+			<li><a href="{{ m.url }}">{{ m.name }}</a></li>
 		{% endfor %}
 	{% else %}
 		{{ def_menu() }}
 	{% endif %}
-	</ul>
-{% endblock main_menu %}
+	</div>
+{% endblock header %}
 	

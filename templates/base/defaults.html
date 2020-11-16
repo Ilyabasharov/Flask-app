@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 
 {% macro def_title() %}
-    <title>A <sup><small>*</small></sup> visualisation</title>
+    <title> visualisation </title>
 {% endmacro %}
 
 {% macro def_menu() %}
 	<li> Map dimension </li>
 	<li> How it works </li>
 	<li> About </li>
+{% endmacro %}
+
+{% macro def_domain() %}
+    <base href="vis">
+{% endmacro %}
+
+{% macro def_licence() %}
+    <p>&copy; All Rights Reserved. Created by Ilya Basharov.
 {% endmacro %}
 

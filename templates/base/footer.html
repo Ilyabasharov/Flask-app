@@ -1,4 +1,17 @@
 <!DOCTYPE html>
 
-<body>
+{% from 'base/defaults.html' import def_licence %}
+
+{% block footer %}
+	<div class="footer">
+		{{ def_licence() }}
+		{% if contacts %}
+			{% for item in contacts -%}
+				<li><a href="{{ m.url }}">{{ m.name }}</a></li>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock footer %}
+
+</body>
 </html>

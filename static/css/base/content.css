@@ -1,7 +1,7 @@
-body {
-    font-family: Arial, Tahoma;
-    font-size: 100%;
-    color: #000;
-    background: #407189;
+.content {
+    font-size: 150%;
+    background: #fdc073;
+    min-height: 90%;
     margin: 0;
+    box-sizing: border-box;
 }
