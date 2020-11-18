@@ -6,6 +6,9 @@ __pycache__/
 # Mac extensions
 **/.DS_Store
 
+# jupyter notebook
+.ipynb_checkpoints
+
 # C extensions
 *.so
 

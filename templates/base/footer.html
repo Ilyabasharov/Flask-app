@@ -4,14 +4,17 @@
 
 {% block footer %}
 	<div class="footer">
-		{{ def_licence() }}
+		{% if licence %}
+			<p>&copy; {{ licence }} </p>
+		{% else %}
+			{{ def_licence() }}
+		{% endif %}
+
 		{% if contacts %}
-			{% for item in contacts -%}
+			<li> Links: </li>
+			{% for item in contacts %}
 				<li><a href="{{ item.url }}">{{ item.name }}</a></li>
 			{% endfor %}
 		{% endif %}
 	</div>
 {% endblock footer %}
-
-</body>
-</html>

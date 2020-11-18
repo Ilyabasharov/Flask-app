@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+{% extends 'base/header.html' %}
+{% block content %}
+{{ super() }}
+<div class="content">
+	<h1> Oooooooooops! </h1>
+	<h2> Page Not Found! Go back to start <a href="{{url_for('main')}}"> page </a></h2>
+</div>
+{% include 'base/footer.html' %}
+{% endblock content %}

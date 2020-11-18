@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 
-{% extends 'base.html' %}
-
+{% extends 'base/header.html' %}
 {% block content %}
-	{{ super() }}
-	<h1>Fill dimension</h1>
-	<form action="/dim" method="post" class="form-contact">
-		<p><label> Height: </label><input type="text" name="height" value="10" requied/>
-		<p><label> Width: </label><input type="text" name="width" value="10" requied/>
-		<p><input type="submit" value="let's go!">
+{{ super() }}
+{% include 'base/content.html' %}
+<div class="content">
+	<p> Fill dimension </p>
+	<form action="/start" method="post">
+	<table border=0>
+		<tr><td>Height:</td><td><input type="text" name="height" value="10" requied maxlength="2" minlength="1"></td></tr>
+		<tr><td>Width:</td><td><input type="text" name="width" value="10" requied maxlength="2" minlength="2"></td></tr>
+		<tr><td><input type="submit" value="Let's go!"></td></tr>
+		<tr><td><input type="reset" value="Reset"></td></tr>
+	</table>
 	</form>
+</div>
+{% include 'base/footer.html' %}
 {% endblock content %}

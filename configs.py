@@ -4,10 +4,11 @@ def get_configs(path='configs') -> dict:
 	result = dict()
 
 	for config in os.listdir(path):
-		item, end = os.path.splitext(config)
-
-		if end == 'yaml':
+		if config.endswith('yaml'):
 			with open(os.path.join('configs', config), 'r') as f:
-				result |= yaml.load(f)
+				tmp = yaml.load(f, Loader=yaml.FullLoader)
+				
+				if tmp is not None:
+					result |= tmp
 
 	return result

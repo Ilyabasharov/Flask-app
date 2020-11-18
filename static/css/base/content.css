@@ -1,7 +1,12 @@
 .content {
     font-size: 150%;
     background: #fdc073;
-    min-height: 90%;
-    margin: 0;
-    box-sizing: border-box;
+    min-height: 80%;
+}
+
+.content p, table {
+    color: #3F4137;
+    margin: 0 auto;
+    text-align: center;
+    border: none;
 }

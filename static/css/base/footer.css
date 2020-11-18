@@ -1,9 +1,33 @@
 .footer {
     list-style: none;
     background: #3F4137;
-    height: 5%;
+    height: 10%;
+    margin: 0 auto;
+    padding: 0;
     color: #fdc073;
     font-size: 150%;
     overflow: hidden;
-    box-sizing: border-box;
+}
+
+.footer p {
+    margin-left: 50px;
+}
+
+.footer li {
+    float: left;
+    display: inline;
+    margin-left: 50px;
+}
+
+.footer li.last {
+    float: right;
+}
+
+.footer li a {
+    color: #fdc073;
+    text-decoration: none;
+}
+
+.footer li a:hover {
+    color: #FDA83D;
 }

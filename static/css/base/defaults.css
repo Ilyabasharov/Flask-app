@@ -7,3 +7,9 @@
 html, body {
 	height: 100%;
 }
+
+h1, h2 {
+	color: #3F4137;
+	margin: 0 auto;
+    text-align: center;
+}
