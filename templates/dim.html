@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block content %}
+	{{ super() }}
+	<h1>Fill dimension</h1>
+	<form action="/dim" method="post" class="form-contact">
+		<p><label> Height: </label><input type="text" name="height" value="10" requied/>
+		<p><label> Width: </label><input type="text" name="width" value="10" requied/>
+		<p><input type="submit" value="let's go!">
+	</form>
+{% endblock content %}

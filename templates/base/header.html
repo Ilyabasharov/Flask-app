@@ -23,7 +23,7 @@
 	<div class = "main_menu">
 	{% if menu %}
 		{% for item in menu -%}
-			<li><a href="{{ m.url }}">{{ m.name }}</a></li>
+			<li><a href="{{ item.url }}">{{ item.name }}</a></li>
 		{% endfor %}
 	{% else %}
 		{{ def_menu() }}

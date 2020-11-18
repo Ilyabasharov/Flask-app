@@ -1,0 +1,12 @@
+domain: visualisation.io
+title: Visualisation
+
+menu:
+  - url: dim
+    name: Map dimension
+
+  - url: how
+    name: How it works
+
+  - url: about
+    name: About

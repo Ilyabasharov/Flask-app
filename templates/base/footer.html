@@ -7,7 +7,7 @@
 		{{ def_licence() }}
 		{% if contacts %}
 			{% for item in contacts -%}
-				<li><a href="{{ m.url }}">{{ m.name }}</a></li>
+				<li><a href="{{ item.url }}">{{ item.name }}</a></li>
 			{% endfor %}
 		{% endif %}
 	</div>
