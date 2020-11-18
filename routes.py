@@ -1,29 +1,28 @@
-from flask import (
-	Flask,
-	request,
-	render_template
-	)
+import redis, flask
+import configs
 
-from configs import get_configs
-
-app = Flask(__name__)
-configs = get_configs()
+app = configs.create_app()
+data = redis.Redis(host='127.0.0.1', port=5001, db=0)
+defaults = configs.get_configs('configs/base')
 
 @app.route('/start', methods=['POST', 'GET'])
 def start():
-	if request.method == 'POST':
-		print(request.form)
-
-	return render_template('start.html', **configs)
+	return flask.render_template('start.html', **defaults)
 
 @app.route('/')
-@app.route('/dim')
+@app.route('/dim', methods=['POST'])
 def main():
-	return render_template('dim.html', **configs)
+	if flask.request.method == 'POST':
+		if configs.checkCorrectness(**flask.request.form):
+			flask.redirect(flask.url_for('/start'))
+		else:
+			flask.flash('Oooops! Check your input.', category='error')
+
+	return flask.render_template('dim.html', **defaults)
 
 @app.errorhandler(404)
 def nonePage(error):
-	return render_template('none.html', **configs)
+	return flask.render_template('none.html', **defaults)
 
 if __name__ == '__main__':
 	app.run(debug=True)

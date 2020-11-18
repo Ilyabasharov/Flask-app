@@ -10,3 +10,14 @@
     text-align: center;
     border: none;
 }
+
+.flash {
+    color: #3F4137;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.flash.error {
+    border: 1px solid #FF4343;
+    background: #FF9C9C;
+}

@@ -5,8 +5,15 @@
 {{ super() }}
 {% include 'base/content.html' %}
 <div class="content">
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category, message in messages %}
+				<div class="flash {{ category }}"> {{ message }} </div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
 	<p> Fill dimension </p>
-	<form action="/start" method="post">
+	<form action="/dim" method="post">
 	<table border=0>
 		<tr><td>Height:</td><td><input type="text" name="height" value="10" requied maxlength="2" minlength="1"></td></tr>
 		<tr><td>Width:</td><td><input type="text" name="width" value="10" requied maxlength="2" minlength="2"></td></tr>
