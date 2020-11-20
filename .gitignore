@@ -12,6 +12,9 @@ __pycache__/
 # C extensions
 *.so
 
+#redis database
+*.rdb
+
 # Distribution / packaging
 .Python
 build/
