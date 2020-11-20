@@ -4,7 +4,7 @@
     min-height: 80%;
 }
 
-.content p, table {
+.content p, table, form {
     color: #3F4137;
     margin: 0 auto;
     text-align: center;

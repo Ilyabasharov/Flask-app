@@ -1,28 +1,49 @@
-import redis, flask
+import redis, os, flask, numpy
 import configs
 
-app = configs.create_app()
-data = redis.Redis(host='127.0.0.1', port=5001, db=0)
-defaults = configs.get_configs('configs/base')
+def_conf = configs.get_configs('configs/base')
+app_conf = configs.get_configs('configs')
 
-@app.route('/start', methods=['POST', 'GET'])
-def start():
-	return flask.render_template('start.html', **defaults)
+app = configs.create_app(app_conf['SECRET_KEY'])
+data = redis.StrictRedis(host='localhost')
 
 @app.route('/')
 @app.route('/dim', methods=['POST'])
-def main():
+def dim():
+	global app_conf, def_conf
+
 	if flask.request.method == 'POST':
 		if configs.checkCorrectness(**flask.request.form):
-			flask.redirect(flask.url_for('/start'))
+			return flask.redirect(flask.url_for('start', **flask.request.form))
 		else:
-			flask.flash('Oooops! Check your input.', category='error')
+			flask.flash(app_conf['ERROR'], category='error')
 
-	return flask.render_template('dim.html', **defaults)
+	return flask.render_template('dim.html', **def_conf)
+
+@app.route('/compute/height<height>width<width>', methods=['POST'])
+def compute(height: str, width: str):
+	global app_conf, def_conf, data
+
+	data.set('map', configs.matrixFromDict(
+		height=int(height),
+		width=int(width),
+		form=flask.request.form.to_dict()
+		).tobytes())
+
+	return flask.render_template('dim.html', **def_conf)
+
+@app.route('/start/height<height>width<width>')
+def start(height: str, width: str):
+	global def_conf
+
+	return flask.render_template('start.html',
+		height=int(height), width=int(width), **def_conf)
 
 @app.errorhandler(404)
 def nonePage(error):
-	return flask.render_template('none.html', **defaults)
+	global def_conf
+
+	return flask.render_template('none.html', **def_conf)
 
 if __name__ == '__main__':
 	app.run(debug=True)
