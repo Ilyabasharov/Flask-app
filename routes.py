@@ -24,20 +24,43 @@ def dim():
 def compute(height: str, width: str):
 	global app_conf, def_conf, data
 
-	data.set('map', configs.matrixFromDict(
+	matrix, obstacles = configs.matrixFromDict(
 		height=int(height),
 		width=int(width),
-		form=flask.request.form.to_dict()
-		).tobytes())
+		form=flask.request.form.to_dict())
 
-	return flask.render_template('dim.html', **def_conf)
+	path = numpy.array(configs.astar(
+		matrix.reshape(int(height), int(width)),
+		start=(0, 0),
+		end = (int(height) - 1, int(width) - 1)))
+
+	data.hmset('compute', {
+		'map': matrix.tobytes(),
+		'path': path.tobytes(),
+		'obstacles': obstacles.tobytes(),
+		'height': height,
+		'width': width})
+
+	if None in path:
+		flask.flash(app_conf['ERROR'], category='error')
+
+	return flask.render_template(
+		'compute.html',
+		height=int(height),
+		width=int(width),
+		path=path.tolist(),
+		obstacles=obstacles.tolist(),
+		**def_conf)
 
 @app.route('/start/height<height>width<width>')
 def start(height: str, width: str):
 	global def_conf
 
-	return flask.render_template('start.html',
-		height=int(height), width=int(width), **def_conf)
+	return flask.render_template(
+		'start.html',
+		height=int(height), 
+		width=int(width), 
+		**def_conf)
 
 @app.errorhandler(404)
 def nonePage(error):

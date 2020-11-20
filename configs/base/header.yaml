@@ -2,7 +2,7 @@ domain: visualisation.io
 title: Visualisation
 
 menu:
-  - url: dim
+  - url: /
     name: Map dimension
 
   - url: how

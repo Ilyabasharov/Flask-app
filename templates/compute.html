@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+{% extends 'base/header.html' %}
+{% block content %}
+{{ super() }}
+{% include 'base/content.html' %}
+<div class="content">
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category, message in messages %}
+				<div class="flash {{ category }}"> {{ message }} </div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<p> Result of computation. <a href="/"> Recompute? </a></p>
+	<table>
+		{%- for i in range(height) -%}
+		<tr>
+			{%- for j in range(width) -%}
+				{% if (i, j) == (0, 0) -%}
+					<td><input type="text" value="s" size="1"></td>
+				{% elif (i, j) == (height - 1, width - 1) -%}
+					<td><input type="text" value="f" size="1"></td>
+				{% elif path and [i, j] in path -%}
+					<td><input type="text" value="*" size="1"></td>
+				{% elif [i, j] in obstacles -%}
+					<td><input type="text" value="%" size="1"></td>
+				{% else -%}
+					<td><input type="text" value="" size="1"></td>
+				{% endif %}
+			{%- endfor -%}
+		</tr>
+		{% endfor %}
+	</table>
+	
+</div>
+{% include 'base/footer.html' %}
+{% endblock content %}
