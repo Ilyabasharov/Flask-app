@@ -5,7 +5,7 @@ def_conf = configs.get_configs('configs/base')
 app_conf = configs.get_configs('configs')
 
 app = configs.create_app(app_conf['SECRET_KEY'])
-data = redis.StrictRedis(host='localhost')
+data = redis.Redis(host='redis', port=6379)
 
 @app.route('/dim')
 @app.route('/')
