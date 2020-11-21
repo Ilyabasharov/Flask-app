@@ -19,7 +19,6 @@ def last():
 	global def_conf, data
 
 	request = data.hgetall('compute')
-	print(type(request), request, not request)
 
 	if not request:
 		return flask.render_template(
@@ -72,7 +71,6 @@ def start():
 	global def_conf
 
 	form = flask.request.form.to_dict()
-	print(form)
 
 	return flask.render_template(
 		'start.html',

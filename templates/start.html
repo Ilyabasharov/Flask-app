@@ -11,7 +11,7 @@
 		{%- for i in range(height) -%}
 		<tr>
 			{%- for j in range(width) -%}
-			<td><input type="checkbox" name="{{ i }}{{ j }}"></td>
+			<td><input type="checkbox" name="{{ i }}_{{ j }}"></td>
 			{%- endfor -%}
 		</tr>
 		{% endfor %}

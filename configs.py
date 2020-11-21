@@ -34,10 +34,10 @@ def checkCorrectness(height: str, width: str) -> bool:
 def matrixFromDict(height: int, width: int, form: dict) -> tuple[numpy.array]:
     matrix = numpy.zeros(height*width, dtype=numpy.int)
     obstacles = []
-    print(form)
+    
     for key in form:
         if form[key] == 'on':
-            i, j = map(int, key)
+            i, j = map(int, key.split('_'))
             matrix[i*width + j] = 1
             obstacles.append([i, j])
 
