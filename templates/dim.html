@@ -13,10 +13,10 @@
 		{% endif %}
 	{% endwith %}
 	<p> Fill dimension </p>
-	<form action="/dim" method="post">
+	<form action="/start" method="post">
 	<table border=0>
-		<tr><td>Height:</td><td><input type="text" name="height" value="10" requied maxlength="2" minlength="1"></td></tr>
-		<tr><td>Width:</td><td><input type="text" name="width" value="10" requied maxlength="2" minlength="2"></td></tr>
+		<tr><td>Height:</td><td><input type="number" name="height" value="10" requied min="3" max="100"></td></tr>
+		<tr><td>Width:</td><td><input type="number" name="width" value="10" requied min="3" max="100"></td></tr>
 		<tr><td><input type="submit" value="Let's go!"></td><td><input type="reset" value="Reset"></td></tr>
 	</table>
 	</form>

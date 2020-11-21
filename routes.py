@@ -7,18 +7,34 @@ app_conf = configs.get_configs('configs')
 app = configs.create_app(app_conf['SECRET_KEY'])
 data = redis.StrictRedis(host='localhost')
 
+@app.route('/dim')
 @app.route('/')
-@app.route('/dim', methods=['POST'])
 def dim():
 	global app_conf, def_conf
 
-	if flask.request.method == 'POST':
-		if configs.checkCorrectness(**flask.request.form):
-			return flask.redirect(flask.url_for('start', **flask.request.form))
-		else:
-			flask.flash(app_conf['ERROR'], category='error')
-
 	return flask.render_template('dim.html', **def_conf)
+
+@app.route('/last')
+def last():
+	global def_conf, data
+
+	request = data.hgetall('compute')
+	print(type(request), request, not request)
+
+	if not request:
+		return flask.render_template(
+			'last.html',
+			height=None,
+			**def_conf)
+
+	return flask.render_template(
+		'last.html',
+		height=int(request[b'height']),
+		width=int(request[b'width']),
+		path=numpy.frombuffer(request[b'path'], numpy.int).reshape(-1, 2).tolist(),
+		obstacles=numpy.frombuffer(request[b'obstacles'], numpy.int).reshape(-1, 2).tolist(),
+		**def_conf)
+
 
 @app.route('/compute/height<height>width<width>', methods=['POST'])
 def compute(height: str, width: str):
@@ -30,12 +46,11 @@ def compute(height: str, width: str):
 		form=flask.request.form.to_dict())
 
 	path = numpy.array(configs.astar(
-		matrix.reshape(int(height), int(width)),
+		matrix.reshape(int(height), int(width)).tolist(),
 		start=(0, 0),
-		end = (int(height) - 1, int(width) - 1)))
+		end = (int(width) - 1, int(height) - 1)))
 
 	data.hmset('compute', {
-		'map': matrix.tobytes(),
 		'path': path.tobytes(),
 		'obstacles': obstacles.tobytes(),
 		'height': height,
@@ -52,14 +67,17 @@ def compute(height: str, width: str):
 		obstacles=obstacles.tolist(),
 		**def_conf)
 
-@app.route('/start/height<height>width<width>')
-def start(height: str, width: str):
+@app.route('/start', methods=['POST'])
+def start():
 	global def_conf
+
+	form = flask.request.form.to_dict()
+	print(form)
 
 	return flask.render_template(
 		'start.html',
-		height=int(height), 
-		width=int(width), 
+		height=int(form['height']), 
+		width=int(form['width']), 
 		**def_conf)
 
 @app.errorhandler(404)

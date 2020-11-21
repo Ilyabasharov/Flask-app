@@ -5,7 +5,7 @@
 {{ super() }}
 {% include 'base/content.html' %}
 <div class="content">
-	<p> Fill Matrix </p>
+	<p> Fill Matrix. By default, start point is (1, 1), finish - (height, width) </p>
 	<form action="{{ url_for('compute', height=height, width=width) }}" method="post">
 	<table>
 		{%- for i in range(height) -%}

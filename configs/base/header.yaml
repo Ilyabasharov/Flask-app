@@ -2,11 +2,11 @@ domain: visualisation.io
 title: Visualisation
 
 menu:
-  - url: /
+  - url: dim
     name: Map dimension
 
-  - url: how
+  - url: https://en.wikipedia.org/wiki/A*_search_algorithm
     name: How it works
 
-  - url: about
-    name: About
+  - url: last
+    name: Last computing
