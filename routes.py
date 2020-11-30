@@ -1,11 +1,12 @@
 import redis, os, flask, numpy
-import configs
+import planning, configs
 
 def_conf = configs.get_configs('configs/base')
 app_conf = configs.get_configs('configs')
 
 app = configs.create_app(app_conf['SECRET_KEY'])
-data = redis.Redis(host='redis', port=6379)
+#data = redis.Redis(host='redis', port=6379)
+data = redis.Redis(host='localhost', port=6379)
 
 @app.route('/dim')
 @app.route('/')
@@ -39,12 +40,12 @@ def last():
 def compute(height: str, width: str):
 	global app_conf, def_conf, data
 
-	matrix, obstacles = configs.matrixFromDict(
+	matrix, obstacles = planning.matrixFromDict(
 		height=int(height),
 		width=int(width),
 		form=flask.request.form.to_dict())
 
-	path = numpy.array(configs.astar(
+	path = numpy.array(planning.astar(
 		matrix.reshape(int(height), int(width)).tolist(),
 		start=(0, 0),
 		end = (int(width) - 1, int(height) - 1)))
@@ -85,4 +86,4 @@ def nonePage(error):
 	return flask.render_template('none.html', **def_conf)
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run()

@@ -2,11 +2,14 @@ domain: visualisation.io
 title: Visualisation
 
 menu:
-  - url: url_for(dim)
+  - url: dim
     name: Map dimension
+    global: false
 
   - url: https://en.wikipedia.org/wiki/A*_search_algorithm
     name: How it works
+    global: true
 
-  - url: url_for(last)
+  - url: last
     name: Last computing
+    global: false

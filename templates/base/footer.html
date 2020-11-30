@@ -13,7 +13,11 @@
 		{% if contacts %}
 			<li> Links: </li>
 			{% for item in contacts %}
-				<li><a href="{{ item.url }}">{{ item.name }}</a></li>
+				{% if item.global %}
+					<li><a href="item.url">{{ item.name }}</a></li>
+				{% else %}
+					<li><a href="{{ url_for(item.url) }}">{{ item.name }}</a></li>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 	</div>
